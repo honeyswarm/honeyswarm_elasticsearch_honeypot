@@ -11,11 +11,11 @@ from aiohttp import web
 from aiohttp import client
 from hpfeeds.asyncio import ClientSession
 
-HPFSERVER = os.environ.get("HPFSERVER", "172.17.0.1")
-HPFPORT = int(os.environ.get("HPFPORT", 20000))
-HPFIDENT = os.environ.get("HPFIDENT", "5eb54b585884bc3c412c7e11")
-HPFSECRET = os.environ.get("HPFSECRET", "5eb54b585884bc3c412c7e11")
-HIVEID = os.environ.get("HIVEID", "UnknownHive")
+HPFSERVER = os.environ.get("HPFSERVER", "172.17.0.2")
+HPFPORT = int(os.environ.get("HPFPORT", 10000))
+HPFIDENT = os.environ.get("HPFIDENT", "5eb5a6c36ed455537928cff6")
+HPFSECRET = os.environ.get("HPFSECRET", "5eb5a6c36ed455537928cff6")
+HIVEID = os.environ.get("HIVEID", "5eb54948388e2c4ee0b367ed")
 
 logging.basicConfig(level=logging.ERROR)
 logger = logging.getLogger(__name__)
@@ -65,7 +65,10 @@ async def handler(request):
         "http_query": request.path_qs,
         "http_post": http_post,
         "http_headers": http_headers,
-        "http_path": request.path
+        "http_path": request.path,
+        "port": 9200,
+        "service": "ElasticSearch",
+        "honeypot_type": "ElasticSearch"
     }
 
     # Send the Broker message
